@@ -6,7 +6,7 @@ import os
 # --------------------
 # Ayarlar
 # --------------------
-TOKEN = ("MTQyOTk2MjM5MzMwMzM4ODIxMQ.GWmnaI.Gb85-4uo7hgSPlV7SBfdXVW6JB9SEakW2fJP6A")  # Render Environment kısmına eklenecek
+TOKEN = os.getenv("TOKEN")
 SES_KANAL_ID = 1429963189751119984
 DUYURU_KANAL = "genel-duyuru"
 SELAM_KANAL_ID = 1423633138839715935  # Selam mesajlarının dinleneceği kanal
@@ -107,3 +107,4 @@ async def temizle(ctx, miktar: int = 50):
     await ctx.send(f"{len(deleted)} mesaj silindi ✅", delete_after=5) 
 
 bot.run(TOKEN)
+
