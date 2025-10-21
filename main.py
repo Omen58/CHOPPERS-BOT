@@ -6,7 +6,7 @@ import os
 # --------------------
 # Ayarlar
 # --------------------
-TOKEN = os.getenv("DISCORD_TOKEN")  # Render Environment kısmına eklenecek
+TOKEN = ("MTQyOTk2MjM5MzMwMzM4ODIxMQ.GWmnaI.Gb85-4uo7hgSPlV7SBfdXVW6JB9SEakW2fJP6A")  # Render Environment kısmına eklenecek
 SES_KANAL_ID = 1429963189751119984
 DUYURU_KANAL = "genel-duyuru"
 SELAM_KANAL_ID = 1423633138839715935  # Selam mesajlarının dinleneceği kanal
@@ -94,9 +94,16 @@ async def on_message(message):
 
     if message.channel.id == SELAM_KANAL_ID:
         content = message.content.lower()
-        if any(word in content for word in ["sa", "selamün aleyküm", "selamun aleykum", "merhaba"]):
+        if any(word in content for word in ["sa", "selamün aleyküm", "selamun aleykum", "merhaba","sa", "selamün aleyküm", "selamun aleykum", "merhaba", "hey", "yo", "hi", "hii", "naber", "selam kanka", "selam millet", "günaydın", "tünaydın", "wassup", "heeeyy", "selaaam", "hopa", "selamlar"]):
             await message.reply("Aleyküm selam kardeşim 😎🌙")
 
     await bot.process_commands(message)  # komutların da çalışması için
+
+@bot.command()
+@commands.has_permissions(manage_messages=True)  # Sadece mesajları yönetme yetkisi olanlar kullanabilir
+async def temizle(ctx, miktar: int = 50):
+    """Varsayılan olarak son 50 mesajı siler."""
+    deleted = await ctx.channel.purge(limit=miktar)
+    await ctx.send(f"{len(deleted)} mesaj silindi ✅", delete_after=5) 
 
 bot.run(TOKEN)
